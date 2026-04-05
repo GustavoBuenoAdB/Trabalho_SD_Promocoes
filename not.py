@@ -1,3 +1,5 @@
+CHAVE_PRIV = "priv_noti.der"
+
 def valida_sha():
 
 def assina_sha():

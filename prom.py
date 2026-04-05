@@ -1,3 +1,5 @@
+CHAVE_PRIV = "priv_prom.der"
+
 def valida_sha():
 
 def assina_sha():
