@@ -1,0 +1,15 @@
+- Testar a Chave RSA
+- Criar uma chave publica e privada pra cada um dos 4 microserviços e colocar respectivamente em "GATE: "pub_gate.der",
+	RANK: "pub_rank.der",
+	PROM: "pub_prom.der",
+	NOTI: "priv_noti.der"," e GATE: "priv_gate.der", RANK: "priv_rank.der", PROM: "priv_prom.der", NOTI: "priv_noti.der",
+- Ajustar as Filas do rabitmq
+- testar a diferença de bindar a routing key e ler a fila (separar a função de ler fila em Ler fila e se increver pra receber a fila)
+- programar as funções internas de cada microsserviço
+	- interface com usuario
+	- Contador/lista dos ranks
+	- notificar todos os clientes no not
+
+- Definir um cabeçalho pra informações da promoção (nome, preço, topicos)
+- implementar funções de leitura e escrita de informaçẽos do cabeçalho (TODAS)
+
