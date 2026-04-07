@@ -2,6 +2,31 @@ KEY = 'key'
 EXCH = 'exc'
 FILA = 'fil'
 
+#acho que as filas tão aqui atoa
+
+R_KEY_GATEWAY = 'rk_gate'
+FILA_GATEWAY = 'fl_gate'
+#eu acho que no fim do dia todos os exch tem que ser o mesmo
+EXCH_GATEWAY = 'ex_gate'
+
+R_KEY_NOTIFICA = 'rk_noti'
+FILA_NOTIFICA = 'fl_noti'
+EXCH_NOTIFICA = 'ex_noti'
+
+R_KEY_RANKING = 'rk_rank'
+FILA_RANKING = 'fl_rank'
+EXCH_RANKING = 'ex_rank'
+
+R_KEY_POMOCAO = 'rk_prom'
+FILA_POMOCAO = 'fl_prom'
+EXCH_POMOCAO = 'ex_prom'
+
+R_KEY_PROM_LIVRO = 'rk_livr'
+R_KEY_PROM_ROUPA = 'rk_roup'
+R_KEY_PROM_ESPORTE = 'rk_espo'
+R_KEY_PROM_DOMESTICO = 'rk_dome'
+R_KEY_PROM_COMIDA = 'rk_comi'
+R_KEY_PROM_QUENTES = 'rk_quen'
 
 #chaves
 
