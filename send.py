@@ -1,16 +1,24 @@
 import pika
 import defs
 
-def envia_msg(fila, msg, key, exch):
+def inic_conec(exch):
 	connection = pika.BlockingConnection(pika.ConnectionParameters('localhost'))
 	channel = connection.channel()
 
-	channel.queue_declare(queue=fila, durable=True, arguments={'x-queue-type': 'quorum'})
+	channel.exchange_declare(exchange=exch, exchange_type='direct')
+	channel.confirm_delivery()
 
-	channel.basic_publish(exchange=exch, routing_key=key, body=msg)
-	print(" [x] Sent 'Hello World!'")
+	return connection, channel
+
+def envia_msg(channel, msg, key, exch):
+	channel.basic_publish(exchange=exch, routing_key=key, body=msg, properties=pika.BasicProperties(delivery_mode=2))
+
+def main():
+	connection, channel = inic_conec(defs.EXCH)
+
+	envia_msg(channel, "TESTE", defs.KEY, defs.EXCH)
 
 	connection.close()
 
 if __name__ == '__main__':
-	envia_msg(defs.FILA,'Salve Salveeee!!', defs.KEY, defs.EXCH)
+	main()

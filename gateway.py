@@ -29,35 +29,61 @@ def gera_assinatura_msg(msg):
 	signature = pkcs1_15.new(key).sign(h)
 	return signature
 
-def envia_msg(fila, msg):
+def inic_conec(exch):
 	connection = pika.BlockingConnection(pika.ConnectionParameters('localhost'))
 	channel = connection.channel()
 
-	channel.queue_declare(queue=fila, durable=True, arguments={'x-queue-type': 'quorum'})
+	channel.exchange_declare(exchange=exch, exchange_type='direct')
+	channel.confirm_delivery()
 
-	channel.basic_publish(exchange='', routing_key='hello', body=msg)
-	print(" [x] Sent 'Hello World!'")
+	return connection, channel
+
+def envia_msg(channel, msg, key, exch):
+	channel.basic_publish(exchange=exch, routing_key=key, body=msg)
+
+def main():
+
+	#essa função vai entrar em um loop infinito de leitura
+	le_fila(defs.FILA_GATEWAY, defs.EXCH_GATEWAY)
+
+	#essa parada aqui, vai ter que ser uma parte do callback, leu enviou pq leu sabe, pq ler e mandar sem ser com thread vai dar pau
+	connection, channel = inic_conec(defs.EXCH)
+	#enviar pra promo
+	envia_msg(channel, "TESTE_GATE_PROMO", defs.R_KEY_POMOCAO, defs.EXCH_POMOCAO)
 
 	connection.close()
+
+if __name__ == '__main__':
+	main()
+
+def inic_fila(channel, fila, exch):
+	channel.queue_declare(queue=fila, durable=True, arguments={'x-queue-type': 'quorum'})
+	channel.exchange_declare(exchange=exch, exchange_type='direct')
+
+def bind_fila(channel, fila, exch, key):
+	channel.queue_bind(exchange=exch, queue=fila, routing_key=key)
+
+def consumir(channel, fila):
+	channel.basic_consume(queue=fila, auto_ack=True, on_message_callback=callback)
+	channel.start_consuming()
+
+def le_fila(fila, exch):
+	connection = pika.BlockingConnection(pika.ConnectionParameters('localhost'))
+	channel = connection.channel()
+
+	inic_fila(channel, fila, exch)
+	bind_fila(channel, fila, exch, defs.R_KEY_GATEWAY)
+	consumir(channel, fila)
 
 def callback(ch, method, properties, body):
 	print(f" [x] Received {body}")
 
-def le_fila(fila):
-	connection = pika.BlockingConnection(pika.ConnectionParameters('localhost'))
-	channel = connection.channel()
+#def comando_cliente():
 
-	channel.queue_declare(queue=fila, durable=True, arguments={'x-queue-type': 'quorum'})
-	channel.basic_consume(queue=fila, auto_ack=True, on_message_callback=callback)
+#def mostra_lista_promo():
 
-	channel.start_consuming()
+#def armazena_promo():
 
-def comando_cliente():
+#def envia_promo():
 
-def mostra_lista_promo():
-
-def armazena_promo():
-
-def envia_promo():
-
-def envia_voto():
+#def envia_voto():
