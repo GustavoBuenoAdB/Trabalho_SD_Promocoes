@@ -9,8 +9,8 @@ FILA_NOTIFICA = 'fl_noti'
 R_KEY_RANKING = 'rk_rank'
 FILA_RANKING = 'fl_rank'
 
-R_KEY_POMOCAO = 'rk_prom'
-FILA_POMOCAO = 'fl_prom'
+R_KEY_PROMOCAO = 'rk_prom'
+FILA_PROMOCAO = 'fl_prom'
 
 R_KEY_PROM_LIVRO = 'rk_livr'
 R_KEY_PROM_ROUPA = 'rk_roup'
@@ -33,11 +33,11 @@ CHAVE_PUBLICA = {
 	NOTI: "pub_noti.der",
 }
 
-CABECALHO = {
+'''CABECALHO = {
 	ini_bits_SHA: 0
 	tam_bits_SHA: 32
 	id_promo: 
 	voto:
 	promo
 	(nome, preço, topicos)
-}
+}'''

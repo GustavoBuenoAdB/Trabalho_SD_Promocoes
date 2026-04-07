@@ -44,12 +44,12 @@ def envia_msg(channel, msg, key, exch):
 def main():
 
 	#essa função vai entrar em um loop infinito de leitura
-	le_fila(defs.FILA_GATEWAY, defs.EXCH_GATEWAY)
+	#le_fila(defs.FILA_GATEWAY, defs.EXCH_GATEWAY)
 
 	#essa parada aqui, vai ter que ser uma parte do callback, leu enviou pq leu sabe, pq ler e mandar sem ser com thread vai dar pau
 	connection, channel = inic_conec(defs.EXCH)
 	#enviar pra promo
-	envia_msg(channel, "TESTE_GATE_PROMO", defs.R_KEY_POMOCAO, defs.EXCH_POMOCAO)
+	envia_msg(channel, "TESTE_GATE_PROMO", defs.R_KEY_PROMOCAO, defs.EXCH)
 
 	connection.close()
 
