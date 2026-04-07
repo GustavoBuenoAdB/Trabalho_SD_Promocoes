@@ -41,17 +41,6 @@ def inic_conec(exch):
 def envia_msg(channel, msg, key, exch):
 	channel.basic_publish(exchange=exch, routing_key=key, body=msg)
 
-def main():
-
-	#essa função vai entrar em um loop infinito de leitura
-	#le_fila(defs.FILA_GATEWAY, defs.EXCH_GATEWAY)
-
-	#essa parada aqui, vai ter que ser uma parte do callback, leu enviou pq leu sabe, pq ler e mandar sem ser com thread vai dar pau
-	connection, channel = inic_conec(defs.EXCH)
-	#enviar pra promo
-	envia_msg(channel, "TESTE_GATE_PROMO", defs.R_KEY_PROMOCAO, defs.EXCH)
-
-	connection.close()
 
 if __name__ == '__main__':
 	main()
@@ -77,6 +66,21 @@ def le_fila(fila, exch):
 
 def callback(ch, method, properties, body):
 	print(f" [x] Received {body}")
+
+def interface_cliente():
+	print("[1] Adicionar nova promoção \n [2] Listar promoções \n [3] Votar promoções" )
+
+def main():
+
+	#essa função vai entrar em um loop infinito de leitura
+	#le_fila(defs.FILA_GATEWAY, defs.EXCH_GATEWAY)
+
+	#essa parada aqui, vai ter que ser uma parte do callback, leu enviou pq leu sabe, pq ler e mandar sem ser com thread vai dar pau
+	connection, channel = inic_conec(defs.EXCH)
+	#enviar pra promo
+	envia_msg(channel, "TESTE_GATE_PROMO", defs.R_KEY_PROMOCAO, defs.EXCH)
+
+	connection.close()
 
 #def comando_cliente():
 
