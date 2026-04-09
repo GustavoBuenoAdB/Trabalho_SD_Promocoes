@@ -29,10 +29,11 @@ def callback(ch, method, properties, body):
 	print(f" [x] Received {body}")
 
 def read_name_protocol():
-
+	return
 
 def read_name_protocol():
- 
+
+	return
 
 def main():
 	le_fila(defs.EXCH)

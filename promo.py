@@ -34,4 +34,4 @@ def assina_sha():
 
 def envia_msg(fila, msg):
 
-def le_fila(fila):'''
+def le_fila(fila): já feito'''

@@ -24,7 +24,7 @@ def valida_assinatura(msg, assinatura, quem):
 
 def gera_assinatura_msg(msg):
 	key = RSA.import_key(open(CHAVE_PRIVADA, 'rb').read())
-	msg.encode()
+	msg = msg.encode()
 	h = SHA256.new(msg)
 	signature = pkcs1_15.new(key).sign(h)
 	return signature
@@ -40,7 +40,6 @@ def inic_conec(exch):
 
 def envia_msg(channel, msg, key, exch):
 	channel.basic_publish(exchange=exch, routing_key=key, body=msg)
-
 
 if __name__ == '__main__':
 	main()
@@ -82,12 +81,47 @@ def main():
 
 	connection.close()
 
-#def comando_cliente():
+def comando_cliente():
+	return
 
-#def mostra_lista_promo():
+def mostra_lista_promo(cliente, promocoes):
+	print(f"=== PROMOÇÕES DISPONÍVEIS ===")
 
-#def armazena_promo():
+	encontrou_promo = False
 
-#def envia_promo():
+	for promo in promocoes.values():
+		#Tem que colocar aqui direito a parte das categorias do cliente, porque não sei como vai ficar
+		if promo['n_rk'] in cliente:
+			print(f"  Categoria: {promo['categoria']}")
+			print(f"  [{promo['id_promo']}] {promo['promo']}")
+			encontrou_promo = True
 
-#def envia_voto():
+	if encontrou_promo == False:
+		print("  Nenhuma promoção disponível para suas categorias.")
+
+
+def armazena_promo():
+	#Promos que serão hardcoded pré execução
+	promos = {
+		#R_KEY_PROM_LIVRO = 'rk_livr'
+		"id_promo" : {"ini_bits_SHA":0, "tam_bits_SHA":32, "nome_promo":"faz o L", "promo_id":0, "n_rk": 0 , "rk_1":0, "rk_2":0},
+
+		#R_KEY_PROM_ROUPA = 'rk_roup'
+		"id_promo" : {"ini_bits_SHA":0, "tam_bits_SHA":32, "nome_promo":"faz o L", "promo_id":0, "n_rk": 0 , "rk_1":0, "rk_2":0},
+
+		#R_KEY_PROM_ESPORTE = 'rk_espo'
+		"id_promo" : {"ini_bits_SHA":0, "tam_bits_SHA":32, "nome_promo":"faz o L", "promo_id":0, "n_rk": 0 , "rk_1":0, "rk_2":0},
+
+		#R_KEY_PROM_DOMESTICO = 'rk_dome'
+		"id_promo" : {"ini_bits_SHA":0, "tam_bits_SHA":32, "nome_promo":"faz o L", "promo_id":0, "n_rk": 0 , "rk_1":0, "rk_2":0},
+
+		#R_KEY_PROM_COMIDA = 'rk_comi'
+        "id_promo" : {"ini_bits_SHA":0, "tam_bits_SHA":32, "nome_promo":"faz o L", "promo_id":0, "n_rk": 0 , "rk_1":0, "rk_2":0}
+    }
+	return promos
+
+def envia_promo():
+	return
+
+def envia_voto():
+	return
